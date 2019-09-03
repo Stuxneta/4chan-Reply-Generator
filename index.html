@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>4cRG</title>
+<link rel="icon" href="imgs/minileaf4.png">
+<link rel="shortcut icon" type="image/gif" href="imgs/minileaf.gif">
+<head profile="http://www.w3.org/2005/10/profile">
+<style>
+    body {
+    	color: maroon;
+	/*font-family: "Times New Roman", sans-serif;*/
+	font-family: Arial, Helvetica, serif;
+        background:#ffe url(imgs/fade.png) top center repeat-x;
+	font-size: 10pt;
+    }
+
+    #post {
+    	background-color: #f0e0d6;
+	padding: 10px;
+	padding-right: 17px;
+	padding-left: 17px;
+	border: 1px outset #f0e0d6;
+    }
+
+    .Arrows {
+	float: left;
+	margin-right: 2px;
+	margin-top: 0;
+	margin-left: 2px;
+    }
+
+    button {
+        padding: 0.01px;
+        border-radius: 5%;
+    }
+
+    .Buttons {
+	position: relative;	
+	left: 50px;
+    }
+</style>
+</head>
+<body>
+<img src="imgs/logo-transparent-mini.png">
+<br><br><br>
+<button onclick="Generate()">Generate</button>
+<button onclick="SubmitPost()">Submit Reply</button> | 
+<button onclick="Delete()">Delete</button>
+<button onclick="DeleteSpecified()">Delete Specific Post</button>
+<hr style="color:maroon; border-width: 0.1px;">
+
+<table id='post'>
+	<tr>
+    	<td>
+    		<div id="demo"></div>
+        </td>
+    </tr>
+    <tr>
+    	<td>
+        	<div style='color:blue; text-decoration: underline;'>
+        		<div id="reply"></div>
+            </div>
+            <div id="message"></div>
+        </td>
+    </tr>
+</table>
+
+<script src="date.js"></script>
+<script>
+
+let Sayings = [
+    'Welcome to 4chan Reply Generator. Click Generate to Generate a new post.<br>Click Delete to delete a random post.<br><br>Currently Working on:<br>1. Fixing the Delete Specified Post function to work.<br>2. Custom input boxes.',
+    'But they let out illegal Mexican rapists.', 
+    'You just wish you had half his confidence in life', 
+    'Im a sick fuck for asking. Any incest pics?', 
+    'A sexy ass bitch, I would breed her', 
+    'show a load on her face', 
+    'Do you hate your family?',
+    'OP is a fag',
+];
+
+function Delete() {
+    if (Sayings.length != 1) {    	
+	Sayings.pop();
+    }
+    console.log(`Sayings length: ${Sayings.length}`);
+}
+
+function DeleteSpecified() {
+    let input = prompt('Input the post number to delete.');
+
+    console.log(Sayings);
+    Sayings.pop(input);
+    console.log(Sayings);
+}
+
+function SubmitPost() {
+    let input = prompt('Input you reply!');
+
+    console.log(Sayings);
+    Sayings.push(input);
+    console.log(Sayings);
+}
+
+let RandomNum = 0;
+console.log(`RandomNum: ${RandomNum}`);
+
+function Generate() {
+  RandomNum = Math.floor(Math.random() * Sayings.length);
+  
+  let PostName = "Anonymous";
+  if (RandomNum == 0) {
+      PostName = "<span style='color:red;'>4chan Reply Generator ## Admin</span>";
+  }
+
+  document.getElementById("demo").innerHTML = `<span style='color:Green; font-weight: bold;'>${PostName}</span> ` + `${d.getMonth() + 1}/${d.getDay() + 1}/${d.getFullYear()}(${Day})${d.getHours()}:${d.getMinutes()}:${d.getSeconds()} No.${RandomNum}`;
+  
+  let ifpostnum = Math.floor(Math.random() * 2);
+  if (ifpostnum == 1) {
+  	let PostNum = Math.floor(Math.random() * 808641064 );
+  	document.getElementById("reply").innerHTML = `<br> >>${PostNum}`;
+  }
+  
+  document.getElementById("message").innerHTML = Sayings[RandomNum];
+
+  console.log(ifpostnum);
+}
+</script>
+
+</body>
+</html>
+
